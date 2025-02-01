@@ -1,10 +1,10 @@
-name: Scheduled Python Script
+name: Export Time Every Minute
 
 on:
   schedule:
-    - cron: "11 12 * * *"  # Runs every day at 15:30 UTC (Japan time 00:30 JST)
-    # min/hour/day/month/week
-  workflow_dispatch: #allows manual execution
+    - cron: "*/1 * * * *"  # Runs every 1 minute
+  workflow_dispatch:  # Allows manual execution
+
 jobs:
   run-script:
     runs-on: ubuntu-latest
@@ -15,10 +15,13 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
-          python-version: '3.9'  # 必要なバージョンを指定
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt || echo "No dependencies"
+          python-version: "3.9"
 
       - name: Run script
         run: python script.py
+
+      - name: Upload timestamp file
+        uses: actions/upload-artifact@v3
+        with:
+          name: timestamp-log
+          path: timestamp_*.txt
