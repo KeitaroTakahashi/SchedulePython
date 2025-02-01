@@ -2,7 +2,7 @@ name: Scheduled Python Script
 
 on:
   schedule:
-    - cron: "12 7 * * *"  # Runs every day at 15:30 UTC (Japan time 00:30 JST)
+    - cron: "8 12 * * *"  # Runs every day at 15:30 UTC (Japan time 00:30 JST)
     # min/hour/day/month/week
   workflow_dispatch: #allows manual execution
 jobs:
